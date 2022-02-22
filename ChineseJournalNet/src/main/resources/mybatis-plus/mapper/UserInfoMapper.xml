@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cqvip.innocence.project.mapper.UserInfoMapper">
+
+    <select id="getUserInfoPage" resultType="com.cqvip.innocence.project.model.vo.UserInfoVO">
+        select distinct u."ID",u."USER_NAME",u."PASSWORD",u."STATUS",u."VERIFICATION_TYPE",u."LINK_MAN",
+        u."UNIT",u."PHONE",u."EMAIL",u."ADDRESS",u."AREA",u."PROVINCE",u."UNIT_TYPE",u."OPERATOR_ID",
+        u."INDUSTRY",u."USER_TYPE",u."PAYMENT_TYPE",u."FAX",u."REMARK",u."DELETED",u."POST_CODE",
+        ug."ID" userGroupId,ug."NAME" userGroupName
+        from "CHINESEJOURNAL"."USER_INFO" u
+        left join "CHINESEJOURNAL"."USER_GROUP" ug on ug.ID = u.USER_GROUP_ID
+        left join "CHINESEJOURNAL"."USER_IP_INFO" ui on ui.USER_ID = u.ID and ui.deleted = 0
+        <where>
+          u.deleted = 0
+            <if test="filterByIP !=null and filterByIP == true">
+                    <if test="ip !=null and ip != ''">
+                      <if test='ip.contains("-")'>
+                          and
+                          <foreach item="item" index="index" collection='ip.split("-")'  open="(" separator=" " close=")">
+                              <if test="index == 0">
+                                  replace(ui.START_IP,'.','') <![CDATA[ <= ]]> #{item}
+                              </if>
+                              <if test="index == 1">
+                                 and replace(ui.FINISH_IP,'.','') <![CDATA[ >= ]]> #{item}
+                              </if>
+                          </foreach>
+                      </if>
+                      <if test='!ip.contains("-")'>
+                        and replace(ui.START_IP,'.','') <![CDATA[ <= ]]> #{ip}
+                        and replace(ui.FINISH_IP,'.','') <![CDATA[ >= ]]> #{ip}
+                      </if>
+                    </if>
+                    <if test="ipUnit !=null and ipUnit != ''">
+                        and ui.UNIT like CONCAT('%',#{ipUnit,jdbcType=VARCHAR},'%')
+                    </if>
+                    <if test="ipRemark != null and ipRemark != ''">
+                        and ui.REMARK like CONCAT('%',#{ipRemark,jdbcType=VARCHAR},'%')
+                    </if>
+            </if>
+            <!--<if test="needIp != null and needIp == true">-->
+                <!--and u.ID in ( select USER_ID from "CHINESEJOURNAL"."USER_IP_INFO" ui)-->
+            <!--</if>-->
+            <if test="filterByIP ==null or filterByIP == false">
+                <if test="userName != null and userName != ''">
+                    and u.USER_NAME like CONCAT('%',#{userName,jdbcType=VARCHAR},'%')
+                </if>
+                <if test="unit != null and unit != ''">
+                    and u.UNIT like CONCAT('%',#{unit,jdbcType=VARCHAR},'%')
+                </if>
+                <if test="email != null and email != ''">
+                    and u.EMAIL like CONCAT('%',#{email,jdbcType=VARCHAR},'%')
+                </if>
+                <if test="linkMan != null and linkMan != ''">
+                    and u.LINK_MAN like CONCAT('%',#{linkMan,jdbcType=VARCHAR},'%')
+                </if>
+                <if test="userType != null">
+                    and u.USER_TYPE = #{userType}
+                </if>
+                <if test="status != null ">
+                    <if test="status == true">
+                        and u.STATUS = 1
+                    </if>
+                    <if test="status == false">
+                        and u.STATUS = 0
+                    </if>
+                </if>
+                <if test="paymentType != null ">
+                    and u.PAYMENT_TYPE = #{paymentType}
+                </if>
+                <if test="userGroupId != null and userGroupId != ''">
+                    and u.USER_GROUP_ID = #{userGroupId}
+                </if>
+                <if test="remark != null and remark != ''">
+                    and u.REMARK like CONCAT('%',#{remark,jdbcType=VARCHAR},'%')
+                </if>
+            </if>
+        </where>
+
+    </select>
+
+    <select id="getUserByIp" resultType="com.cqvip.innocence.project.model.entity.UserInfo">
+        SELECT * FROM "CHINESEJOURNAL"."USER_INFO" u
+        WHERE u.DELETED = 0
+        AND u.ID IN (SELECT USER_ID FROM "CHINESEJOURNAL"."USER_IP_INFO" ui
+          WHERE ui.DELETED = 0  and
+          replace(ui.START_IP, '.', '') <![CDATA[ <= ]]> replace(#{ip}, '.', '')
+          AND replace(ui.FINISH_IP, '.', '') <![CDATA[ >= ]]> replace(#{ip}, '.', ''))
+        <if test="verificationType != null">
+          AND (u.VERIFICATION_TYPE = #{verificationType}
+          OR u.VERIFICATION_TYPE = 'All')
+        </if>
+    </select>
+
+    <select id="getUserByIpRange" resultType="com.cqvip.innocence.project.model.entity.UserInfo">
+        SELECT * FROM "CHINESEJOURNAL"."USER_INFO" u
+        WHERE u.DELETED = 0
+        AND u.ID IN (SELECT USER_ID FROM "CHINESEJOURNAL"."USER_IP_INFO" ui
+        WHERE ui.DELETED = 0 and
+        ((replace(ui.START_IP, '.', '') <![CDATA[ <= ]]> replace(#{startIp}, '.', '')
+        AND replace(ui.FINISH_IP, '.', '') <![CDATA[ >= ]]> replace(#{startIp}, '.', ''))
+        OR
+        (replace(ui.START_IP, '.', '') <![CDATA[ <= ]]> replace(#{finishIp}, '.', '')
+        AND replace(ui.FINISH_IP, '.', '') <![CDATA[ >= ]]> replace(#{finishIp}, '.', ''))
+        OR
+        (replace(ui.START_IP, '.', '') <![CDATA[ >= ]]> replace(#{startIp}, '.', '')
+        AND replace(ui.FINISH_IP, '.', '') <![CDATA[ <= ]]> replace(#{finishIp}, '.', ''))
+        ))
+
+    </select>
+</mapper>

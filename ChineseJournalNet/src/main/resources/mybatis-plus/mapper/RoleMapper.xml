@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cqvip.innocence.project.mapper.RoleMapper">
+
+    <select id="getRolesByAdmin" parameterType="com.cqvip.innocence.project.model.entity.Admin" resultType="com.cqvip.innocence.project.model.entity.Role">
+        SELECT ro.id id,ro.NAME ,ro.description description
+            FROM CHINESEJOURNAL.role ro
+            LEFT JOIN CHINESEJOURNAL.admin_role ar on ro.id=ar.role_id
+            LEFT JOIN CHINESEJOURNAL.admin_user ad ON ar.admin_id=ad.id
+            where ad.USER_NAME= #{userName} and ad.id = #{id}
+    </select>
+
+    <select id="getRoles" resultType="com.cqvip.innocence.project.model.entity.Role">
+        select r.*,t.resourceIds as resourceStr from CHINESEJOURNAL.ROLE r
+        left join (select role_id,LISTAGG(RESOURCE_ID , ',') WITHIN GROUP (order by role_id) as resourceIds from CHINESEJOURNAL.ROLE_RESOURCE group by role_id)
+        t on t.ROLE_ID = r.ID
+        <where>
+            <if test="name != null and name !='' ">
+                r.NAME like concat('%',#{name},'%')
+            </if>
+            AND DELETED = 0
+        </where>
+        LIMIT ((#{page.current}-1)*#{page.size}),#{page.size}
+    </select>
+</mapper>

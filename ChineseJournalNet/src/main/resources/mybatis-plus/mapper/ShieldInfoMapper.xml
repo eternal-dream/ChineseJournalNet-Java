@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cqvip.innocence.project.mapper.ShieldInfoMapper">
+
+    <select id="checkArticleDetail" resultType="int">
+        SELECT
+            count(*)
+        FROM
+        CHINESEJOURNAL.SHIELD_INFO
+        WHERE LNGID  = #{lngid}
+    </select>
+
+    <select id="checkJournalDetail" resultType="int">
+        SELECT
+            count(*)
+        FROM
+        CHINESEJOURNAL.SHIELD_INFO
+        WHERE GCH5  = #{gch5}
+    </select>
+</mapper>

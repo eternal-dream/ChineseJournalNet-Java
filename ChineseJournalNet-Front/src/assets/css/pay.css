@@ -1,0 +1,336 @@
+#header {
+    margin-bottom: 0;
+}
+.pay {
+    margin-bottom: 30px;
+    padding: 10px 90px;
+}
+.pay h2 {
+    height: 52px;
+    color: #050505;
+    font-size: 20px;
+    line-height: 50px;
+    border-bottom: 1px solid #e0e0e0;
+}
+.pay h2 .title {
+    position: relative;
+    display: inline-block;
+    padding: 0 10px;
+}
+.pay h2 .title:after {
+    position: absolute;
+    left: 0;
+    top: 0;
+    content: '';
+    width: 100%;
+    height: 52px;
+    border: 0;
+    border-bottom: 3px solid #15508c;
+    border-radius: 2px 2px 0 0;
+    box-sizing: border-box;
+    pointer-events: none;
+}
+.pay-info {
+    position: relative;
+    margin: 15px 0;
+    padding: 20px;
+    background: #f7fbfd;
+}
+.article-info, .order-info {
+    position: relative;
+    margin-bottom: 20px;
+    padding-right: 200px;
+}
+.article-info dt {
+    margin-bottom: 5px;
+    font-size: 18px;
+    line-height: 26px;
+}
+.article-info dt .pre-view {
+    position: relative;
+    display: inline-block;
+    width: 62px;
+}
+.article-info dt .pre-view a {
+    overflow: hidden;
+    display: inline-block;
+    position: relative;
+    top: 1px;
+    width: 26px;
+    height: 26px;
+    font-size: 13px;
+    line-height: 24px;
+    color: #545454;
+    background: #EDEDF1;
+    vertical-align: bottom;
+    border-radius: 15px;
+    transition: all .3s;
+    -webkit-transition: all .3s;
+}
+.article-info dt .pre-view a:hover {
+    width: 57px;
+    text-decoration: none;
+    color: #fff;
+    background: #F09E00;
+    box-shadow: 2px 0 2px rgba(0,0,0,.3) inset;
+}
+.article-info dt .pre-view a i {
+    top: 3px;
+    font-size: 22px;
+    margin: 0 2px;
+}
+.article-info dd {
+    margin-bottom: 5px;
+    font-size: 14px;
+    line-height: 26px;
+}
+.article-info dd .from {
+	margin: 0 4px;
+}
+.article-info dd .from:before, .article-info dd .vol:before {
+	display: inline-block;
+	font-size: 12px;
+	font-weight: bold;
+	line-height: 14px;
+	content: "\00B7";
+}
+.article-info dd .from .medal {
+	margin-left: 5px;
+}
+
+
+.article-info dd .vol:before {
+	margin-right: 3px;
+}
+.article-info dd .abstract {
+	color: #999999;
+
+}
+
+.pay-info .cost {
+	position: absolute;
+	right: 20px;
+	top: 20px;
+	width: 180px;
+	height: 57px;
+	font-size: 30px;
+	line-height: 55px;
+	text-align: center;
+	color: #dd0000;
+	background: #fff;
+	border: 1px solid #ccc;
+}
+.pay-info .tips {
+	padding: 20px 0 0;
+	border-top: 1px solid #eee;
+}
+.pay-info .tips a {
+	margin: 0 2px;
+	font-size: 16px;
+}
+.pay-info .tips a i {
+	margin: 0 2px;
+}
+.pay-info .tips ul:before, .pay-info .tips ul:after {
+	display: table;
+	content: "";
+	clear: both;
+}
+.pay-info .tips li {
+	float: left;
+	width: 50%;
+	font-size: 14px;
+	line-height: 22px;
+}
+.pay-mode-select {
+    position: relative;
+    margin: 15px 0;
+}
+.pay-mode-select .pay-mode {
+	height: 70px;
+	margin-top: -1px;
+	padding: 25px 20px;
+	font-size: 14px;
+	line-height: 18px;
+	border: 1px solid #eee;
+}
+.pay-mode-select .balance {
+	height: 90px;
+	padding: 35px 20px;
+}
+.pay-mode-select .pay-mode.current {
+	background: #f7fbfd;
+}
+.pay-mode-select .pay-mode .layui-form-radio i {
+	position: relative;
+	top: 0px;
+	margin-right: 10px;
+}
+.pay-mode-select .pay-mode .layui-form-radio div {
+	position: relative;
+	width: 200px;
+	font-size: 16px;
+}
+.pay-mode-select .pay-mode .layui-form-radio div:before {
+	display: inline-block;
+	position: relative;
+	width: 40px;
+	height: 26px;
+	margin-right: 5px;
+	background: url(~@/assets/images/pay-mode-icon.png) no-repeat;
+	content: "";
+	vertical-align: middle;
+}
+.pay-mode-select .pay-mode.balance .layui-form-radio div:before {
+	top: -4px;
+}
+.pay-mode-select .pay-mode.alipay .layui-form-radio div:before {
+	top: -2px;
+	background-position: -50px 0;
+}
+.pay-mode-select .pay-mode.wechat .layui-form-radio div:before {
+	top: -2px;
+	background-position: -100px 0;
+}
+.pay-mode-select .pay-mode.balance .layui-btn {
+	position: relative;
+	top: -1px;
+	margin-left: 10px;
+}
+.pay-mode-select .pay-mode .balance-info {
+	display: inline-block;
+	margin: -20px 0;
+	padding: 20px 40px;
+	border-left: 1px solid #eee;
+}
+.pay-mode-select .pay-mode .balance-info .num {
+	font-size: 16px;
+	color: #dd0000;
+}
+.pay-mode-select .pay-mode .inline-alert {
+	display: inline-block;
+	color: #ff6c00;
+}
+.pay-confirm {
+	margin-left: 70%;
+	text-align: right;
+}
+.pay-confirm > div {
+	font-size: 14px;
+	line-height: 30px;
+}
+.pay-confirm hr {
+	margin: 5px 0;
+}
+.pay-confirm .inline-text {
+	display: inline-block;
+	width: 100px;
+}
+.pay-confirm .num {
+	font-size: 16px;
+}
+.pay-confirm .actual-pay {
+	color: #dd0000;
+}
+.pay-confirm .actual-pay .num {
+	font-size: 18px;
+
+}
+.pay-confirm-submit {
+	margin-top: 15px;
+}
+.pay-alert {
+	padding: 30px;
+}
+.pay-alert .title {
+
+	font-size: 18px;
+	text-align: center;
+}
+.pay-alert .content {
+	padding: 30px 40px;
+}
+.pay-alert .content i {
+	float: left;
+	width: 60px;
+	height: 60px;
+	margin-right: 10px;
+	font-size: 48px;
+}
+.pay-alert .content i:before {
+	position: relative;
+	top: 20px;
+	width: 48px;
+	height: 48px;
+}
+.pay-alert .content p {
+	font-size: 16px;
+	line-height: 24px;
+}
+.pay-alert .submit {
+	text-align: center;
+}
+
+.order-info {
+	margin-bottom: 0;
+	font-size: 16px;
+	line-height: 57px;
+}
+
+.pay-code {
+	width: 700px;
+	margin: 0 auto;
+	padding: 20px;
+}
+.pay-code .tips {
+	margin-bottom: 20px;
+}
+.pay-code .tips li {
+	line-height: 22px;
+}
+.pay-code .qrcode-box {
+
+	padding: 20px 0;
+}
+.pay-code .qrcode-box:before, .pay-code .qrcode-box:after {
+	display: table;
+	content: "";
+	clear: both;
+}
+.pay-code .qrcode {
+	float: left;
+	width: 300px;
+}
+.pay-code .qrcode-img {
+	width: 300px;
+	height: 300px;
+	margin-bottom: 20px;
+	padding: 39px;
+	border: 1px solid #ccc;
+}
+.pay-code .qrcode-img img {
+	width: 220px;
+	height: 220px;
+}
+.pay-code .qrcode-tips {
+	height: 60px;
+	padding: 10px 15px;
+	font-size: 14px;
+	line-height: 20px;
+	color: #fff;
+	background: #4db83c;
+}
+.pay-code .qrcode-tips i {
+	float: left;
+	width: 40px;
+	height: 40px;
+	margin-right: 10px;
+}
+.pay-code .qrcode-tips i:before {
+	font-size: 40px;
+	position: relative;
+	top: 12px;
+}
+.wechat-code {
+	background: url(~@/assets/images/wechat-scan.png) no-repeat right top;
+}

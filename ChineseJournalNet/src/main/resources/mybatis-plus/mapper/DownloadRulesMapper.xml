@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cqvip.innocence.project.mapper.DownloadRulesMapper">
+
+    <select id="getRulesByUserId" resultType="com.cqvip.innocence.project.model.entity.DownloadRules">
+        select
+            dr.*
+        from
+        "CHINESEJOURNAL"."USER_INFO" ui
+        join
+        "CHINESEJOURNAL"."DOWNLOAD_RULES" dr
+        on
+         ui.ID  = dr.USER_ID
+         or
+         ui.USER_GROUP_ID = dr.GROUP_ID
+        where ui.id = #{id}
+    </select>
+</mapper>

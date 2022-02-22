@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cqvip.innocence.project.mapper.StatClassMapper">
+
+    <select id="statByName" resultType="com.cqvip.innocence.project.model.entity.StatClass">
+      select name,SORT_NUM,
+      LISTAGG(CLASS_NUMBER , ',') WITHIN GROUP (order by CLASS_NUMBER) as CLASS_NUMBER
+      from CHINESEJOURNAL.STAT_CLASS group by name,SORT_NUM ORDER BY SORT_NUM
+    </select>
+</mapper>

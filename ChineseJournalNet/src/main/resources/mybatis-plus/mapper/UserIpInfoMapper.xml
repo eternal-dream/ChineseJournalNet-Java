@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cqvip.innocence.project.mapper.UserIpInfoMapper">
+
+    <select id="selectByIp" resultType="com.cqvip.innocence.project.model.entity.UserIpInfo">
+        SELECT * FROM "CHINESEJOURNAL"."USER_IP_INFO"
+        WHERE DELETED = 0
+        AND USER_ID  = #{userId}
+        AND replace(START_IP, '.', '') <![CDATA[ <= ]]> replace(#{ip}, '.', '')
+        AND replace(FINISH_IP, '.', '') <![CDATA[ >= ]]> replace(#{ip}, '.', '')
+    </select>
+</mapper>

@@ -1,0 +1,482 @@
+#header {
+	margin-bottom: 0;
+}
+.advance {
+	margin-bottom: 30px;
+	padding: 10px 90px;
+}
+.advance .layui-tab {
+	margin: 0;
+}
+.help {
+	position: relative;
+	float: right;
+	margin-top: -40px;
+	font-size: 14px;
+	color: #ff8a20;
+	z-index: 0;
+}
+.help a {
+	color: inherit;
+}
+.tip {
+	margin-top: -10px;
+	margin-bottom: 20px;
+}
+.tip h2 {
+	font-size: 14px;
+	margin-bottom: 5px;
+}
+.tip .label {
+	float: none!important;
+	height: auto!important;
+	margin-right: 5px!important;
+}
+.tip p {
+	font-size: 12px;
+	line-height: 20px;
+}
+.tip p span {
+	margin-right: 5em;
+}
+.tip a {
+	float: right;
+	display: inline-block;
+	padding: 0 5px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+}
+.advance .layui-tab-title {
+	height: 65px;
+	border-bottom: 1px solid #e0e0e0
+}
+.advance .layui-tab-title li {
+	padding: 0 10px;
+	color: #646464;
+	font-size: 18px;
+	line-height: 64px;
+}
+.advance .layui-tab-title .layui-this {
+	color: #050505;
+	font-size: 24px;
+}
+.advance .layui-tab-title .layui-this:after {
+	height: 66px;
+	border: 0;
+	border-bottom: 3px solid #0033a0;;
+}
+.advance .layui-tab-content {
+	padding: 25px 0;
+}
+.advance .advance-input {
+	margin-bottom: 25px;
+}
+.advance .input-group {
+	margin-bottom: 10px;
+	font-size: 14px;
+	line-height: 34px;
+}
+.advance .input-group:last-child {
+	margin-bottom: 0;
+}
+
+
+.advance .input-group .label, .advance .input-group .text {
+	line-height: 34px;
+}
+.advance-input .input-group:first-child {
+	margin-left: 70px;
+}
+.advance .input-group:before, .advance .input-group:after {
+	display: table;
+	clear: both;
+	content: "";
+}
+.advance .input-group .inline-sel, .advance .inline-input, .advance .inline-btn, .advance .label, .advance .text {
+	float: left;
+	height: 34px;
+	margin-right: 10px;
+}
+.advance .input-group .inline-btn {
+	margin-right: 0;
+}
+.advance .input-group .inline-btn .layui-btn-group, .advance .input-group .inline-btn .layui-btn {
+	vertical-align: bottom;
+}
+.advance .input-group .inline-btn .layui-btn {
+	width: 34px;
+	padding: 0;
+	font-size: 20px;
+	line-height: 32px;
+	text-align: center;
+	border-radius: 100%;
+	background: #fff;
+	color: #0033a0;
+	border: 2px solid #0033A0;
+}
+.advance .input-group .layui-input {
+	height: 34px;
+}
+.advance .input-group .layui-btn {height: 34px;line-height: 34px;}
+.advance .sel-l {
+	width: 60px;
+}
+.advance .sel-k {
+	width: 130px;
+	margin-right: -1px;
+}
+.advance .sel-c {
+	width: 75px;
+}
+.advance .sel-t {
+	width: 115px;
+}
+.advance .sel-t2 {
+	width: 150px;
+}
+
+.advance .inline-input {
+	position: relative;
+	width: 647px;
+}
+.advance .inline-input.has-inline-button input[type='text'] {
+	padding-right: 110px;
+}
+.advance .inline-input .layui-btn {
+	position: absolute;
+	right: 3px;
+	top: 3px;
+	height: 28px;
+	padding: 0 15px;
+	font-size: 12px;
+	line-height: 28px;
+}
+.formula-input {
+	margin-bottom: 15px;
+}
+.formula-input .layui-textarea {
+	height: 122px;
+}
+
+.advance-filter, .advance-filter .layui-colla-item {
+	position: relative;
+	border: 0;
+}
+.advance-filter .layui-colla-item {
+	margin-bottom: 10px;
+}
+.advance-filter .layui-colla-item .layui-colla-title {
+	position: relative;
+	height: 35px;
+	padding: 0;
+	line-height: 34px;
+	background: transparent;
+	border-bottom: 1px solid #e3dfd5;
+}
+.advance-filter .layui-colla-item .layui-colla-title h2 {
+	float: left;
+	margin-right: 10px;
+	font-size: 17px;
+	line-height: 34px;
+}
+.advance-filter .layui-colla-item .layui-colla-title + .sel-all {
+	position: absolute;
+	left: 85px;
+	margin-top: -28px;
+}
+.advance-filter .layui-colla-item .layui-colla-title + .sel-all .layui-form-checkbox, .advance-filter .layui-colla-item .layui-colla-title + .sel-all .layui-form-checkbox i {
+	height: 22px;
+	line-height: 22px;
+}
+.advance-filter .layui-colla-item .layui-colla-title + .sel-all .layui-form-checkbox span {
+	font-size: 12px;
+}
+.advance-filter .layui-colla-item .layui-colla-title + .sel-all .layui-form-checkbox i {
+	font-size: 14px;
+	line-height: 20px;
+}
+.advance-filter .layui-colla-item .layui-colla-title .layui-colla-icon {
+	left: auto;
+	right: 10px;
+	font-size: 16px;
+}
+
+.advance-filter .layui-colla-item .layui-colla-content {
+	padding: 10px 0;
+	border: 0;
+}
+.advance-filter .layui-colla-item .input-group li {
+	float: left;
+	height: 34px;
+	margin-right: 15px;
+	line-height: 34px;
+}
+.advance-filter .layui-colla-item .list-scroll {
+	overflow: auto;
+	height: 120px;
+}
+.advance-filter .layui-colla-item .cluster-list:before, .advance-filter .layui-colla-item .cluster-list:after {
+	display: table;
+	clear: both;
+	content: "";
+}
+.advance-filter .layui-colla-item .cluster-list li {
+	float: left;
+	width: 25%;
+	margin-bottom: 6px;
+	padding-right: 12px;
+	cursor: pointer;
+    transition: all .3s;
+    -webkit-transition: all .3s;
+
+}
+.advance-filter .layui-colla-item .cluster-list li .icon-arrow-right {
+	float: right;
+	top: 0;
+	margin: 0;
+	width: 34px;
+	height: 34px;
+	font-size: inherit;
+	text-align: center;
+	line-height: 34px;
+	background: transparent;
+	border-radius: 0;
+	transition: all .3s;
+	-webkit-transition: all .3s;
+}
+.advance-filter .layui-colla-item .cluster-list li .icon-arrow-right:before {
+
+}
+.advance-filter .layui-colla-item .cluster-list li .title {
+	display: block;
+	height: 34px;
+	padding-left:8px;
+	padding-right: 0;
+	font-size: 14px;
+	line-height: 34px;
+	background: #F6F5FB;
+	border: 0;
+	border-radius: 0;
+}
+.advance-filter .layui-colla-item .cluster-list li .title .layui-form-checkbox[lay-skin=primary] {
+	vertical-align: bottom;
+}
+.advance-filter .layui-colla-item .cluster-list li .title .layui-form-checkbox[lay-skin=primary] span {
+	padding-right: 5px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	line-height: 34px;
+}
+.advance-filter .layui-colla-item .cluster-list li .title .layui-form-checkbox[lay-skin=primary] i {
+	top: 10px;
+}
+.advance-filter .layui-colla-item .cluster-list .cluster-list {
+	display: none;
+}
+.advance-filter .layui-colla-item .cluster-list li.show-more {
+	width: 100%;
+}
+.advance-filter .layui-colla-item .cluster-list li.show-more .icon-arrow-right {
+	transform:rotate(90deg);
+}
+.advance-filter .layui-colla-item .cluster-list li.show-more .cluster-list {
+	position: relative;
+	display: block;
+	margin-right: -12px;
+	padding: 7px 0;
+	background: #fff;
+}
+.advance-filter .layui-colla-item .cluster-list li.show-more .cluster-list:before {
+	display: block;
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	right: 12px;
+	border: 1px solid #ccc;
+	content: ""
+}
+.advance-filter .layui-colla-item .cluster-list li.show-more .cluster-list li {
+	margin-bottom: 2;
+}
+.advance-filter .layui-colla-item .cluster-list li.show-more .cluster-list li .title {
+	background: transparent;
+}
+.advance-filter .cluster-list .cluster-item a:before, .advance-filter .cluster-list .cluster-item > span:before {
+	display: none;
+}
+
+.advance-submit {
+	padding: 10px 0;
+	text-align: center;
+}
+.advance-submit .layui-btn {
+	width: 150px;
+}
+.advance-submit .layui-btn-primary {
+	width: 100px;
+}
+.advance-submit .sub-link {
+	display: inline-block;
+	width: 100px;
+	font-size: 14px;
+	line-height: 38px;
+	text-align: center;
+	vertical-align: middle;
+}
+.sel-tab {
+	height: 44px;
+	border-bottom: 1px solid #cccacb;
+}
+.sel-tab ul {
+	width: 1200px;
+}
+.sel-tab ul:before, .sel-tab ul:after {
+	display: table;
+	clear: both;
+	content: "";
+}
+.sel-tab li {
+	float: left;
+	width: 232px;
+	text-align: center;
+	margin-right: 8px;
+}
+.sel-tab li:first-child {
+	width: 240px;
+}
+.sel-tab li:last-child {
+    margin-right: 0;
+}
+.sel-tab li a {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	display: block;
+	height: 38px;
+	font-size: 14px;
+	padding: 0 10px;
+	line-height: 38px;
+	color: #6e6e6e;
+	background: #f6f5fb;
+	border-radius: 5px 0 0 5px;
+}
+.sel-tab li a:hover {
+	text-decoration: none;
+}
+.sel-tab li a span {
+	font-size: 12px;
+	line-height: 20px;
+}
+.sel-tab li a span:before {
+	display: inline-block;
+	content: "("
+}
+.sel-tab li a span:after {
+	display: inline-block;
+	content: ")"
+}
+.sel-tab li .sel-close {
+	float: right;
+	line-height: 38px;
+	border-radius: 0 5px 5px 0;
+}
+.sel-tab li .sel-close:hover {
+	background: #e8e8e8
+}
+.sel-tab li.tab-this a {color: #fff;background: #0033a0;}
+
+/*扩展项*/		
+.sel-extra {
+	text-align: center;
+}
+
+/*同义词*/
+.thesaurus-box .layui-layer-tabmain,
+.thesaurus-box .layui-layer-tabmain .layui-layer-tabli,
+.thesaurus {
+	height: 100%;
+}
+
+.thesaurus {
+	padding: 0;
+}
+.thesaurus .intro {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	margin: 5px 20px 0px;
+	font-size: 14px;	
+	line-height: 40px;
+	border-bottom: 1px solid #eee;
+}
+.thesaurus .intro u {
+	margin: 0 5px;
+	font-size: 16px;
+	color: #dd0000;
+}
+.thesaurus .intro .inline-check {
+	margin-left: 5px;
+}
+.thesaurus-list {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	overflow-x: hidden;
+	overflow-y: auto;
+	padding: 10px 20px;
+}
+.thesaurus-list li {
+	display: inline-block;
+	height: 30px;
+	margin: 0 10px 10px 0;
+	line-height: 30px;
+}
+.thesaurus-list li.edit {
+	display: block;
+}
+.my-thesaurus {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 55px;
+    padding: 10px 20px;
+}
+.my-thesaurus .intro {
+	position: static;
+	margin: 0 0 10px;
+}
+.my-thesaurus .inline-text,
+.my-thesaurus .inline-input,
+.my-thesaurus .inline-tip {
+	display: inline-block;
+	height: 30px;
+	line-height: 30px;
+}
+.my-thesaurus .inline-text {
+	margin-right: 5px;
+}
+.my-thesaurus .inline-tip {
+	padding: 0 5px;
+}
+.my-thesaurus input[type='text'] {
+	display: inline-block;
+	width: 220px;
+	height: 30px;
+	vertical-align: middle;
+}
+.thesaurus .submit {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	padding: 10px 0;
+	text-align: center;
+}
+.thesaurus-feedback .my-thesaurus input[type='text'] {
+	width: 400px;
+}

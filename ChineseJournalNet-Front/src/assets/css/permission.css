@@ -1,0 +1,173 @@
+html, body {
+	height: 100%;
+}
+
+#header {
+	margin-bottom: 0;
+}
+#searcher .l-width {
+	display: none;
+}
+#body {
+	height: calc(100% - 251px);
+}
+#body .l-width {
+	position: relative;
+	height: 100%;
+}
+.p-box {
+	position: relative;
+}
+.p-box .p-title {
+	position: absolute;
+	height: 80px;
+	top: -80px;
+	color: #fff;
+
+}
+.p-box .p-title h2 {
+	font-size: 22px;
+	line-height: 80px;
+}
+.regist {
+
+}
+.regist-input, .password-input {
+	margin: 0 auto;
+	padding: 50px 0;
+	width: 750px;
+}
+.input-group {
+	margin-bottom: 20px;
+}
+.input-group:before, .input-group:after {
+	display: table;
+	clear: both;
+	content: "";
+}
+.input-group .label, .input-group .inline-input, .input-group .inline-img, .input-group .inline-tip, .input-group .inline-alert, .input-group .inline-text, .input-group .inline-btn {
+	display: inline-block;
+	vertical-align: middle;
+}
+.input-group .inline-input {
+	width: 310px;
+}
+.regist-input .label {
+	width: 110px;
+	font-size: 16px;
+	text-align: right;
+	line-height: 38px;
+}
+.input-group .inline-input.code {
+	width: 95px;
+}
+.input-group .inline-img img {
+	width: 85px;
+	height: 38px;
+}
+.input-group .inline-tip, .input-group .inline-alert {
+	width: 310px;
+	padding: 0 5px;
+	line-height: 19px;
+	color: #999;
+}
+.input-group .alt-error {
+	color: #dd0000
+}
+.input-group .alt-ok {
+	color: #74B374
+}
+.input-group a {
+	color: #15508c;
+	text-decoration: underline;
+}
+.input-group .layui-btn {
+	color: #fff;
+	text-decoration: none;
+}
+.input-group .inline-text {
+	line-height: 38px;
+}
+
+.agreement {
+	padding-left: 123px;
+}
+.agreement .layui-form-checkbox[lay-skin=primary] {
+	float: left;
+	margin-top: 9px;
+}
+.submit {
+	padding-left: 123px;
+}
+.submit .layui-btn {
+	width: 120px;
+}
+.submit .layui-btn-primary {
+	width: 80px;
+}
+.submit .inline-text {
+	display: inline-block;
+	margin-left: 10px;
+	font-size: 14px;
+	line-height: 38px;
+	vertical-align: middle;
+}
+.submit .inline-text a {
+	margin: 0 2px;
+	text-decoration: underline;
+}
+.password-input .label {
+	width: 150px;
+	font-size: 16px;
+	text-align: right;
+	line-height: 38px;
+}
+.password-input .layui-tab-title .layui-this:after {
+	border: 0;
+	border-bottom: 3px solid #15508c;
+}
+.password-input .layui-tab-content {
+	width: 640px;
+	margin: 0 auto;
+	padding: 30px 10px;
+}
+.password-input .submit {
+	padding: 0;
+	text-align: center;
+}
+
+.web-alert {
+	padding: 80px 200px;
+}
+.web-alert h1 {
+	margin-bottom: 20px;
+}
+.web-alert p {
+	font-size: 14px;
+	line-height: 22px;
+}
+.error {
+	position: absolute;
+	left: 50%;
+	top: 15%;
+	width: 1200px;
+	margin-left: -600px;
+}
+.error .web-alert {
+	padding-left: 50%;
+	background: url(~@/assets/images/icon-error.png) 25% center no-repeat;
+}
+.error .web-alert p, .error .web-alert li {
+	font-size: 16px;
+	line-height: 40px;
+}
+.error .web-alert li:before {
+	display: inline-block;
+	position: relative;
+	width: 10px;
+	height: 10px;
+	margin-right: 3px;
+	background: #555;
+	border-radius: 100%;
+	content: "";
+}

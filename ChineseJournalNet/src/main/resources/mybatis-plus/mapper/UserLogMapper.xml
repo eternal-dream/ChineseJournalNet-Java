@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cqvip.innocence.project.mapper.UserLogMapper">
+
+    <select id="getAllPlates" resultType="java.lang.String">
+        select distinct plate from "CHINESEJOURNAL"."USER_LOG" where plate != ''
+    </select>
+
+    <select id="analysis" parameterType="com.cqvip.innocence.project.model.dto.StatisticsDTO"
+            resultType="java.util.Map">
+        select count(*) count,
+        <if test="type == 'plate'">
+            plate value
+        </if>
+        <if test="type == 'user'">
+            u.ID,u.USER_NAME value
+        </if>
+        <if test="type == 'userGroup'">
+            ug.NAME value
+        </if>
+        <if test="type == 'ipRange'">
+            log.IP_RANGE value
+        </if>
+        <if test="type == 'classify'">
+            sc.NAME value
+        </if>
+        <if test="type == 'custom'">
+          <if test="customType == 'all'">
+            <if test="grainSize == 'day'">
+                substring (log.CREATE_TIME,0,10) value
+            </if>
+            <if test="grainSize == 'week'">
+                TO_CHAR(log.CREATE_TIME, 'IYYY') || '~' || TO_CHAR(log.CREATE_TIME, 'IW') value
+            </if>
+            <if test="grainSize == 'month'">
+                TO_CHAR(log.CREATE_TIME, 'YYYY') || '~' || TO_CHAR(log.CREATE_TIME, 'MM') value
+            </if>
+            <if test="grainSize == 'year'">
+                TO_CHAR(log.CREATE_TIME, 'YYYY') value
+            </if>
+          </if>
+            <if test="customType == 'period'">
+                <if test="grainSize == 'day'">
+                    TO_NUMBER(TO_CHAR(log.CREATE_TIME, 'HH24')) || '点' value
+                </if>
+                <if test="grainSize == 'week'">
+                    TO_CHAR(log.CREATE_TIME, 'day','NLS_DATE_LANGUAGE=''SIMPLIFIED CHINESE''') value
+                </if>
+                <if test="grainSize == 'month'">
+                    TO_NUMBER(TO_CHAR(log.CREATE_TIME, 'dd')) || '号' value
+                </if>
+                <if test="grainSize == 'year'">
+                    TO_NUMBER(TO_CHAR(log.CREATE_TIME, 'MM')) || '月' value
+                </if>
+            </if>
+        </if>
+        from CHINESEJOURNAL.USER_LOG log
+        left join CHINESEJOURNAL.USER_INFO u on u.ID = log.USER_ID
+        left join CHINESEJOURNAL.USER_GROUP ug on ug.ID = u.USER_GROUP_ID
+        left join CHINESEJOURNAL.STAT_CLASS sc on sc.CLASS_NUMBER = log.CLASS_NUMBER
+        <where>
+            log.DELETED = 0
+            AND log.VISIT_TYPE = #{visitType}
+            <if test="startTime != null and startTime != ''">
+                AND log.CREATE_TIME <![CDATA[ >= ]]> #{startTime}
+            </if>
+            <if test="endTime != null and endTime != ''">
+                AND log.CREATE_TIME <![CDATA[ <= ]]> to_date(#{endTime})+1
+            </if>
+            <if test="startIp != null and startIp != ''">
+                AND replace(log.IP, '.', '') <![CDATA[ >= ]]> replace(#{startIp}, '.', '')
+            </if>
+            <if test="endIp != null and endIp != ''">
+                AND replace(log.IP, '.', '') <![CDATA[ <= ]]> replace(#{endIp}, '.', '')
+            </if>
+            <if test="plate != null and plate != ''">
+                AND plate =#{plate}
+            </if>
+            <if test="userIds != null and userIds.size()>0">
+                AND log.USER_ID in
+                <foreach item="id" collection="userIds" open="(" separator="," close=")">
+                  #{id}
+                </foreach>
+            </if>
+            <if test="userGroupId != null">
+                AND u.USER_GROUP_ID = #{userGroupId}
+            </if>
+            <if test="journalName != null and journalName != ''">
+                AND log.JOURNAL_NAME =#{journalName}
+            </if>
+
+            <if test="journalName != null and journalName != ''">
+                AND log.JOURNAL_NAME =#{journalName}
+            </if>
+
+            <if test="classNumber != null and classNumber.length > 0">
+                AND log.CLASS_NUMBER in
+                <foreach item="c" collection="classNumber" open="(" separator="," close=")">
+                    #{c}
+                </foreach>
+            </if>
+        </where>
+        group by
+        <if test="type == 'plate'">
+            plate
+        </if>
+        <if test="type == 'user'">
+            u.ID,u.USER_NAME
+        </if>
+        <if test="type == 'userGroup'">
+            ug.NAME
+        </if>
+        <if test="type == 'ipRange'">
+            log.IP_RANGE
+        </if>
+        <if test="type == 'classify'">
+            sc.NAME
+        </if>
+        <if test="type == 'custom'">
+            <if test="customType == 'all'">
+                <if test="grainSize == 'day'">
+                    substring (log.CREATE_TIME,0,10)
+                </if>
+                <if test="grainSize == 'week'">
+                    TO_CHAR(log.CREATE_TIME, 'IYYY') || '~' || TO_CHAR(log.CREATE_TIME, 'IW')
+                </if>
+                <if test="grainSize == 'month'">
+                    TO_CHAR(log.CREATE_TIME, 'YYYY') || '~' || TO_CHAR(log.CREATE_TIME, 'MM')
+                </if>
+                <if test="grainSize == 'year'">
+                    TO_CHAR(log.CREATE_TIME, 'YYYY')
+                </if>
+            </if>
+            <if test="customType == 'period'">
+                <if test="grainSize == 'day'">
+                    TO_NUMBER(TO_CHAR(log.CREATE_TIME, 'HH24')) || '点'
+                </if>
+                <if test="grainSize == 'week'">
+                    TO_CHAR(log.CREATE_TIME, 'day','NLS_DATE_LANGUAGE=''SIMPLIFIED CHINESE''')
+                </if>
+                <if test="grainSize == 'month'">
+                    TO_NUMBER(TO_CHAR(log.CREATE_TIME, 'dd')) || '号'
+                </if>
+                <if test="grainSize == 'year'">
+                    TO_NUMBER(TO_CHAR(log.CREATE_TIME, 'MM')) || '月'
+                </if>
+            </if>
+        </if>
+        order by count desc
+    </select>
+
+    <select id="getDownloadCountInDateScope" resultType="java.lang.Integer">
+        SELECT
+        count(*)
+        FROM
+        "CHINESEJOURNAL"."USER_LOG" log
+        <where>
+            <if test="rule=='Per_hour'">
+                log.CREATE_TIME > dateadd(HH,-1,SYSDATE)
+            </if>
+            <if test="rule=='Per_day'">
+                log.CREATE_TIME > dateadd(DD,-1,SYSDATE)
+            </if>
+            <if test="rule=='Per_week'">
+                log.CREATE_TIME > dateadd(DD,-7,SYSDATE)
+            </if>
+            <if test="rule=='Per_month'">
+                log.CREATE_TIME > dateadd(MM,-1,SYSDATE)
+            </if>
+            <if test="rule=='Per_year'">
+                log.CREATE_TIME > dateadd(YY,-1,SYSDATE)
+            </if>
+        </where>
+        AND log.USER_ID = #{userId}
+        AND log.VISIT_TYPE = 'Download'
+    </select>
+</mapper>

@@ -1,0 +1,9 @@
+# false : open this Api , true: close this Api
+downPaperApiLock: false
+downpaper:
+  appId: projectjsi
+  appSecret: 06d3c456aa5481eb68ac11bc33e0e0d7
+  clientId: 6e00979a-7aec-4d81-95f8-c70dc2dcf38f
+  isTianYuanData: 0
+  limitRuleId: 2
+  limitUserType: 11

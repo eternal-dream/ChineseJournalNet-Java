@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.cqvip.innocence.project.mapper.ClassifyMapper">
+    <select id="getAllNotSuperClassify" resultType="com.cqvip.innocence.project.model.dto.ClassifyDTO">
+      select
+        ID id,
+        STR_CLASS strClass,
+        STR_NAME strName,
+        STR_LEVEL strLevel,
+        PARENT_ID parentId,
+        STR_PARENT_CLASS strParentClass,
+        CHILDREN children
+      from CHINESEJOURNAL.CLASSIFY where PARENT_ID != '0'
+    </select>
+
+    <select id="getAllSuperClassify" resultType="com.cqvip.innocence.project.model.dto.ClassifyDTO">
+      select
+        ID id,
+        STR_CLASS strClass,
+        STR_NAME strName,
+        STR_LEVEL strLevel,
+        PARENT_ID parentId,
+        STR_PARENT_CLASS strParentClass,
+        CHILDREN children
+      from CHINESEJOURNAL.CLASSIFY where PARENT_ID = '0' ORDER BY STR_CLASS
+    </select>
+
+    <select id="getSubClassifyDataByParentId" parameterType="integer" resultType="com.cqvip.innocence.project.model.dto.ClassifyDTO">
+      select
+        ID id,
+        STR_CLASS strClass,
+        STR_NAME strName,
+        STR_LEVEL strLevel,
+        PARENT_ID parentId,
+        STR_PARENT_CLASS strParentClass,
+        CHILDREN children
+      from CHINESEJOURNAL.CLASSIFY where PARENT_ID = #{parentId}
+    </select>
+</mapper>

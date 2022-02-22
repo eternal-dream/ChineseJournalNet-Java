@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cqvip.innocence.project.mapper.UserDatabaseMapper">
+
+    <select id="searchUserDatabase" resultType="com.cqvip.innocence.project.model.vo.UserDatabaseVO">
+        select distinct ud."USER_ID",ud."DATABASE_ID",ud."ID",ud."CREATE_TIME",ud."MODIFY_TIME",ud."BEGIN_TIME",ud."END_TIME",ud."CLASSIFY",
+        ud."INCEPTION_YEAR",ud."TERMINATION_YEAR",ud."EFFECTIVE",ud."REMARK",ud."DELETED",
+        u."USER_NAME",u."UNIT"
+        from "CHINESEJOURNAL"."USER_DATABASE" ud
+        left join "CHINESEJOURNAL"."DATABASE_INFO" di on di.ID = ud.DATABASE_ID
+        left join "CHINESEJOURNAL"."USER_INFO" u on u.ID = ud.USER_ID
+        left join "CHINESEJOURNAL"."USER_IP_INFO" ui on ui.USER_ID = u.ID and ui.deleted = 0
+        <where>
+            ud.DELETED = 0
+            <if test="filterByIP !=null and filterByIP == true">
+                    <if test="ip !=null and ip != ''">
+                        <!--and ((replace(ui.START_IP,'.','') <![CDATA[ <= ]]> #{ip}-->
+                        <!--and replace(ui.FINISH_IP,'.','') <![CDATA[ >= ]]> #{ip})-->
+                        <!--or-->
+                        <!--<foreach item="item" index="index" collection='ip.split("-")' open="(" separator=" " close=")">-->
+                            <!--<if test="index == 0">-->
+                                <!--replace(ui.START_IP,'.','') <![CDATA[ <= ]]> #{item}-->
+                            <!--</if>-->
+                            <!--<if test="index == 1">-->
+                                <!--and replace(ui.FINISH_IP,'.','') <![CDATA[ >= ]]> #{item}-->
+                            <!--</if>-->
+                        <!--</foreach>-->
+                        <!--)-->
+                        <if test='ip.contains("-")'>
+                            and
+                            <foreach item="item" index="index" collection='ip.split("-")'  open="(" separator=" " close=")">
+                                <if test="index == 0">
+                                    replace(ui.START_IP,'.','') <![CDATA[ <= ]]> #{item}
+                                </if>
+                                <if test="index == 1">
+                                    and replace(ui.FINISH_IP,'.','') <![CDATA[ >= ]]> #{item}
+                                </if>
+                            </foreach>
+                        </if>
+                        <if test='!ip.contains("-")'>
+                            and replace(ui.START_IP,'.','') <![CDATA[ <= ]]> #{ip}
+                            and replace(ui.FINISH_IP,'.','') <![CDATA[ >= ]]> #{ip}
+                        </if>
+                    </if>
+                    <if test="ipUnit !=null and ipUnit != ''">
+                        and ui.UNIT like CONCAT('%',#{ipUnit,jdbcType=VARCHAR},'%')
+                    </if>
+                    <if test="ipRemark != null and ipRemark != ''">
+                        and ui.REMARK like CONCAT('%',#{ipRemark,jdbcType=VARCHAR},'%')
+                    </if>
+            </if>
+            <if test="filterByIP ==null or filterByIP == false">
+                <if test="userName != null and userName != ''">
+                    and u.USER_NAME like CONCAT('%',#{userName,jdbcType=VARCHAR},'%')
+                </if>
+                <if test="unit != null and unit != ''">
+                    and u.UNIT like CONCAT('%',#{unit,jdbcType=VARCHAR},'%')
+                </if>
+                <if test="email != null and email != ''">
+                    and u.EMAIL like CONCAT('%',#{email,jdbcType=VARCHAR},'%')
+                </if>
+                <if test="linkMan != null and linkMan != ''">
+                    and u.LINK_MAN like CONCAT('%',#{linkMan,jdbcType=VARCHAR},'%')
+                </if>
+                <if test="userType != null ">
+                    and u.USER_TYPE = #{userType}
+                </if>
+                <if test="status != null ">
+                  <if test="status == true">
+                      and u.STATUS = 1
+                  </if>
+                  <if test="status == false">
+                      and u.STATUS = 0
+                  </if>
+                </if>
+                <if test="paymentType != null">
+                    and u.PAYMENT_TYPE = #{paymentType}
+                </if>
+                <if test="userGroupId != null ">
+                    and u.USER_GROUP_ID = #{userGroupId}
+                </if>
+                <if test="userRemark != null and userRemark != ''">
+                    and u.REMARK like CONCAT('%',#{userRemark,jdbcType=VARCHAR},'%')
+                </if>
+            </if>
+            <if test="effectStartTime1 != null">
+              and ud.BEGIN_TIME <![CDATA[ >= ]]> #{effectStartTime1}
+            </if>
+            <if test="effectStartTime2 != null">
+                and dateadd(DD,-1,ud.BEGIN_TIME) <![CDATA[ <= ]]> #{effectStartTime2}
+            </if>
+            <if test="effectEndTime1 != null">
+                and ud.END_TIME <![CDATA[ >= ]]> #{effectEndTime1}
+            </if>
+            <if test="effectEndTime2 != null">
+                and ud.END_TIME <![CDATA[<= ]]> #{effectEndTime2}
+            </if>
+            <if test="expired != null">
+              <if test="expired">
+                  and (ud.BEGIN_TIME <![CDATA[ >= ]]> ( select sysdate from dual)
+                  or dateadd(DD,1,ud.END_TIME) <![CDATA[ <= ]]> ( select sysdate from dual))
+              </if>
+              <if test="!expired">
+                and ud.BEGIN_TIME <![CDATA[ <= ]]> ( select sysdate from dual)
+                and dateadd(DD,1,ud.END_TIME) <![CDATA[ >= ]]> ( select sysdate from dual)
+              </if>
+            </if>
+            <if test="effective != null">
+                and ud.EFFECTIVE =#{effective}
+            </if>
+            <if test="databaseId != null">
+                and ud.DATABASE_ID =#{databaseId}
+            </if>
+            <if test="inceptionYear != null">
+                and ud.INCEPTION_YEAR =#{inceptionYear}
+            </if>
+            <if test="terminationYear != null">
+                and ud.TERMINATION_YEAR =#{terminationYear}
+            </if>
+            <if test="remark != null and remark != ''">
+                and ud.REMARK like CONCAT('%',#{remark,jdbcType=VARCHAR},'%')
+            </if>
+        </where>
+    </select>
+
+    <select id="getUserDatabaseByUserId" resultType="com.cqvip.innocence.project.model.vo.UserDatabaseVO">
+
+      SELECT
+		TMP.*,
+		ROWNUM ROW_ID
+        FROM
+            (
+            SELECT
+                ud."USER_ID",
+                ud."DATABASE_ID",
+                ud."ID",
+                ud."CREATE_TIME",
+                ud."MODIFY_TIME",
+                ud."BEGIN_TIME",
+                ud."END_TIME",
+                ud."CLASSIFY",
+                ud."INCEPTION_YEAR",
+                ud."TERMINATION_YEAR",
+                ud."EFFECTIVE",
+                ud."REMARK",
+                ud."DELETED",
+                u."USER_NAME",
+                u."UNIT",
+                u."PAYMENT_TYPE" paymentType,
+                di."NAME" databaseName
+            FROM
+                "CHINESEJOURNAL"."USER_DATABASE" ud
+            LEFT JOIN "CHINESEJOURNAL"."DATABASE_INFO" di ON
+                di.ID = ud.DATABASE_ID
+            LEFT JOIN "CHINESEJOURNAL"."USER_INFO" u ON
+                u.ID = ud.USER_ID
+            WHERE
+                ud.DELETED = 0 ) TMP
+                WHERE USER_ID=#{uid}
+
+    </select>
+</mapper>

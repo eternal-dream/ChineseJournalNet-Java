@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.cqvip.innocence.project.mapper.AdminMapper">
+
+    <!--<select id="getAdminsList" parameterType="com.cqvip.innocence.project.model.dto.AdminRoleView" resultType="com.cqvip.innocence.project.model.dto.AdminRoleView">-->
+        <!--select ad.id adminId,ad.pass_word as passWord, ro.id roleId, ad.name adminName,ro.name roleName,ro.type,-->
+        <!--ad.locked as locked,ad.nick_name nickName,ad.phone phone,ad.email email,ad.remark remark  from admin ad-->
+        <!--left join admin_role ar on ad.id = ar.admin_id-->
+        <!--left join role ro on ar.role_id = ro.id-->
+        <!--<where>-->
+            <!--<if test="adminName != null and adminName != ''">-->
+                <!--and ad.name =#{adminName}-->
+            <!--</if>-->
+            <!--<if test="roleName != null and roleName != ''">-->
+                <!--and ro.name =#{roleName}-->
+            <!--</if>-->
+            <!--<if test="phone != null and phone != ''">-->
+                <!--and ad.phone = #{phone}-->
+            <!--</if>-->
+            <!--<if test="locked != null">-->
+                <!--and ad.locked = #{locked}-->
+            <!--</if>-->
+        <!--</where>-->
+    <!--</select>-->
+
+
+    <select id="getAdminsList" parameterType="com.cqvip.innocence.project.model.vo.AdminRoleVO" resultType="com.cqvip.innocence.project.model.vo.AdminRoleVO">
+        SELECT
+        ad.ID adminId,
+        ad.PASSWORD,
+        ad.USER_NAME adminName,
+        ad.remark remark,
+        tb1.roleName,
+        tb1.roleIds,
+
+        FROM
+        CHINESEJOURNAL.ADMIN ad
+        LEFT JOIN CHINESEJOURNAL.ADMIN_ROLE ar on ar.ADMIN_ID = ad.ID
+        LEFT JOIN CHINESEJOURNAL.ROLE ro on ro.ID = ar.ROLE_ID
+        <where>
+            ad.DELETE = 0
+            <if test="userName != null and userName != ''">
+                and ad.USER_NAME =#{userName}
+            </if>
+            <if test="roleName != null and roleName != ''">
+                and ro.name =#{roleName}
+            </if>
+        </where>
+    </select>
+
+
+    <select id="getAdminsByRoleId" parameterType="long" resultType="com.cqvip.innocence.project.model.entity.Admin">
+        SELECT
+            ad.*
+        FROM
+            CHINESEJOURNAL.admin_role AS ar
+        JOIN
+            CHINESEJOURNAL.ADMIN AS ad
+        ON
+            ad.ID = ar.admin_id AND ar.role_id = #{roleId}
+    </select>
+</mapper>
